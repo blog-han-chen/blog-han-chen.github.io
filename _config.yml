@@ -86,7 +86,7 @@ JB :
     provider : disqus
     disqus :
       #short_name : jekyllbootstrap
-      short_name : disqus_moGpggx7ln
+      short_name : blog-han-chen
     livefyre :
       site_id : 123
     intensedebate :
