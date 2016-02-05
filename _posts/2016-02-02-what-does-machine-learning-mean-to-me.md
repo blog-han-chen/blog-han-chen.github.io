@@ -8,7 +8,7 @@ tags: []
 {% include JB/setup %}
 {:center: style="text-align: center"}
 
-###It's Math
+### It's Math
 
 I always imagined machine learning task as writing sophisticated programs that somehow has "smart" into it. But it really boils down to building a math model based on the data that we have. 
 
@@ -35,7 +35,7 @@ The process of minizing the error is the training step in machine learning. And 
 
 
 
-###Its'optimization
+### Its'optimization
 
 Having the correct model is not enough, we also need it to run fast on a computer. Some basic ideas are 
 
