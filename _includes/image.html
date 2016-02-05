@@ -1,0 +1,44 @@
+<!-- _includes/image.html -->
+<style>
+.image-wrapper {
+    text-align: center;
+}
+.image-wrapper img{
+    max-width:100%;
+max-height:100%;
+}
+.image-wrapper.image-caption {
+    color: grey;
+    margin-top: 10px;
+}
+.image-wrapper.inline {
+    display: inline-block;
+}
+.image-wrapper.small {
+    height: 350px;
+    width: 350px;
+}
+.image-wrapper.middle {
+    height: 450px;
+    width: 450px;
+}
+.image-wrapper.large {
+    height: 600px;
+    width: 600px ;
+}
+</style>
+
+<div class="image-wrapper {{include.display}} {{include.size}}" >
+    {% if include.url %}
+    <a href="{{ include.url }}" title="{{ include.title }}" target="_blank">
+    {% endif %}
+        <img src="{{ site.url }}/{{ include.img }}" alt="{{ include.title }}"/>
+    {% if include.url %}
+    </a>
+    {% endif %}
+    {% if include.caption %}
+        <p class="image-caption">{{ include.caption }}</p>
+    {% endif %}
+</div>
+
+

@@ -1,0 +1,27 @@
+A simple machine learning task can be predicting a student's chance of being admitted to a university, based on the grade and extracurricular activity of past applicants. 
+
+To visualize the graph we have the following: 
+
+//TODO
+
+A simple model would be to draw a line to separate admitted and not-admitted students.
+
+
+And we can describe that mathematically. A line in 2D plane can be represented as $ \theta_{1}x_{1} + \theta_{2}x_{2}=0 $. And the separation of points can be described as 
+
+$$ \theta_{1}x_{1} + \theta_{2}x_{2} > 0 : \ admitted $$
+$$ \theta_{1}x_{1} + \theta_{2}x_{2} <= 0 : \ \ not admitted $$
+
+The following example illustrates why it works: 
+
+//TODO
+
+Now we just need a function that, given parameters $\theta_{1},\theta_{2}$, measures how much error there is in separating the two classes (positive: $y=1$, negative $y=0$). Minimizing that error function would give us the best line.
+
+$$
+error_{total} = \frac{1}{m}\sum_{i}^{m} error(\theta_{1},\theta_{2}, x^{i}_{1}, x^{i} _{2}, y{i})
+$$
+
+
+the total error is the average error for each training example $x^{i}$ with binary label $y^{i}\in\lbrace 0,1\rbrace$
+{:center}

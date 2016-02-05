@@ -68,6 +68,8 @@ task :post do
     post.puts "tags: #{tags}"
     post.puts "---"
     post.puts "{% include JB/setup %}"
+    # added by han
+    post.puts '{:center: style="text-align: center"}'
   end
 end # task :post
 
