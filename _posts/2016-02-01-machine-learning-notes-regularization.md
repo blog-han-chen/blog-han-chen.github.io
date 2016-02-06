@@ -18,7 +18,8 @@ This post gives some examples to each of the above, and will hopefully give you 
 
 > Note, if you have not watched Andrew Ng's video, the following might be hard to understand
 
-###Logistic Regresssion Recap (Skip if you are familiar with notations in Andrew's class)
+Logistic Regresssion Recap (Skip if you are familiar with notations in Andrew's class)
+------
 Take logistic regression as an example, we try to find parameter vector $\theta$ for the hypothesis 
 
 $$ h_{\theta}(x) = \frac{1}{1+e^{-\theta^{T}x}} $$
@@ -61,7 +62,8 @@ Notations summarized here:
 | n | scalar | number of features |
 | $ \lambda $ | scalar | regularization parameter to control how much regularization we want
 
-###How does regularization reduce noise? 
+How does regularization reduce noise? 
+------
 
 The key is to realize that inner product between two vectors depend on their relative direction, AND their length $\left\Vert v_{1}\right\Vert$. 
 
@@ -98,7 +100,8 @@ With regularization, the learning algorithm focuses more on *direction* of $\the
 Here the inner product between theta and red points can still be pretty large, but not because $\theta $ is long, but because $\theta$ is in the optimal direction. 
 
 
-###How does regularization prevent overfitting
+How does regularization prevent overfitting
+------
 
 {% include image.html
             img="image/regularization/prevent-overfit-1.png"
@@ -118,7 +121,8 @@ With regularization, the function starts consider the trade off between classify
 
 We might be getting a line like graph 2 in which theta does not have a y-component. Given enough normal data (green dots on the left, red dots on the right), the cost of making $\theta$ longer in the y direction is higher than classifying all points correctly. 
 
-###How does regularization underfit
+How does regularization underfit
+------
 
  
 With a few more points added to Graph 1, we may no longer consider the points outliers. It is a good idea to draw a line that classifies all points correctly. 
@@ -138,7 +142,8 @@ But with heavy regularization by increasing $\lambda$ in the cost function, we m
  %}
 
 
-###Generalization to Linear Regression: 
+Generalization to Linear Regression: 
+------
 
 So far we have only seen the effect of regularization on logistic regression, but what about other models? Consider the following dataset which we can fit it perfectly and with a quadratic hypothesis by adding an extra quadratic feature
 

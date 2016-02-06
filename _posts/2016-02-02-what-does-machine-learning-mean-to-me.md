@@ -8,7 +8,9 @@ tags: []
 {% include JB/setup %}
 {:center: style="text-align: center"}
 
-### It's Math
+ It's Math
+ ---------
+ 
 
 I always imagined machine learning task as writing sophisticated programs that somehow has "smart" into it. But it really boils down to building a math model based on the data that we have. 
 
@@ -35,7 +37,9 @@ The process of minizing the error is the training step in machine learning. And 
 
 
 
-### Its'optimization
+ Its'optimization
+ ---------
+ 
 
 Having the correct model is not enough, we also need it to run fast on a computer. Some basic ideas are 
 
@@ -100,7 +104,9 @@ Example, finding a line that separates two classes of points:
 </div>
 
 
-###It's domain knowledge. 
+It's domain knowledge. 
+---------
+
 For the previous two parts someone might already have done work for you. Since you are the one applying machine learning technique to _your_ data, this part can't be skipped. 
 
 One of the reasons that we choose neural network to compute vision or speech related tasks is that we know the human brain is exceptionally good at that. It might be an overkill to use it for linear regression. 
