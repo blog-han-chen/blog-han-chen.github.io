@@ -23,44 +23,60 @@ Coursera offers great introduction to neural network: [Andrew Ng's Machine Learn
 
 The basic idea of sequence prediction is that given all previous words in a sentence, predict the next word. In our context it might look like this: 
 
-<div style="text-align:center">
-    Given: SENTENCE_START A T  
-    Predict: G
-    A cDNA sequence should always start with start codon, ATG
-    Given: SENTENCE_START A T G T C C G C A T G A
-    Predict: SENTENCE_END
+<div>
+    Given: SENTENCE_START A T <br> 
+    Predict: G <br>
+    A cDNA sequence should always start with start codon, ATG <br>
+    Given: SENTENCE_START A T G T C C G C A T G A<br>
+    Predict: SENTENCE_END<br>
     A cDNA sequence always ends with a stop codon, in this case, TGA
 </div>
 
 Given a complete cDNA seq `A T G T C C G C A T G A`, our training example looks like: 
-```
+
+~~~
 X (input): SENTENCE_START A T G T C C G C A T G A
 Y (output): A T G T C C G C A T G A SENTECE_END
-```
+~~~
+
+
 We would punish the neural network if, given `SETENCE_START`, it doesn't predict `A`, and given `SENTENCE_START A`, it doesn't predict `T`. Batching them together, given sequence X, the network should predict a sequence similar to Y; it is punished for each character predicted wrong. 
 
-As a start, I am using E. coli cDNA data set downloaded here //TODO. The file is about 5Mb big and contains 4000+ cDNA sequences. For real neural network training it is small, but it should suffice as a toy dataset. 
+As a start, I am using E. coli cDNA data set. The file is about 5Mb big and contains 4000+ cDNA sequences. For real neural network training it is small, but it should suffice as a toy dataset. 
 
 It is easy to parse the sequences using BioPython
-```
+
+~~~
 from Bio import SeqIO
+
 records = SeqIO.parse("data/e_coli_cdna.fa","fasta")
+
 cDNAs = [list(r.seq) for r in records]
+
 print cDNAs[0]
+
 # ['A', 'T', 'G', 'A', 'A', 'A', ... ]
+
 # adding sentence start and end token
+
 cDNAs = [["SENTENCE_START"] + sent + ["SENTENCE_END"] for sent in cDNAs]
-```
+
+~~~
 
 Since DNA has really simple vocabulary, we can turn sequences of characters to and from sequences of indices
 
-```
+~~~
 index_to_word = ["SENTENCE_START",'A','T','C','G','N',"SENTENCE_END"] # N for unknown base pair
+
 word_to_index = dict((c,i) for i,c in enumerate(index_to_word))
+
 encoded_sentence = [word_to_index[c] for c in cDNAs[0]] #encode the first cDNA
+
 print encoded_sentence
+
 # [0, 1, 2, 4, 1, 1, 1 ... ]
-```
+
+~~~
 
 The indices are further processed to one-hot vector (vector with all 0's plus one 1) and fed in our RNN. I won't go into the details here but you can read this [tutorial](http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-2-implementing-a-language-model-rnn-with-python-numpy-and-theano/) if you are interested. 
 
@@ -81,11 +97,11 @@ Note that the training loss, or training error, is similar to testing loss. If y
 
 To ask the network to generate a few sentences: 
 
-```
+~~~
 NNATAAGTGAACCCTGTTGAATAATGATCTGGTTAATAACTGAGAATTAACGATAACTAAATAA
 
 NSENTENCE_STARTNCNCCTTCTTATGAGTTATTAATAGTAACTTAATAAGTAAGTTTCAGTAATGAATAAATAATGTATTAGTACTGAATAATGACTAATSENTENCE_STARTAATAACTAATAACTAGTAAATAACTGAAACCTAAAATAATTATAATAGTTAATGAGTAATAAACTAATCTAATTAAAAGATGAAAGGTAGTAGGATAAATTGAATGGGTGTAGNAATAAGTAAATGTGCCTTAAAGTATGATTAAGATAATAATAAAATGTAAGTAAGTGAAGNTGAATAATAGCTGTGAAATAATGTAAATTGAGTTAATAAGCTAAGTGATTAACACTGAAATCTAATAATAATAAGTATTAAGTAATAAATAACTAATGTTAAATAAATGAGTAATAAGTGATGAAGTAAGCTGTAGTAGCTAATAAATTTATTAATGGAATTTAAAACTGAAGTAACTAATTTGAATTATCTGTAAATAAAGTATCGTTTAATAATAAATCCTTAATTAACTAAATATTTCTTAAGTGAATGAATTAATAACTAAGTGTAAGTAGCCGTGATTTAAATGAAATATGATAGTAAATGTGTAAATAATAACTGATTTCTTAATAAGCAGGGATTTCTGAGCTAGTAAAATTAAGTAATAGTGATANGCTTAATANATAAATGACATAATTAAACTATATGAGTGATGAAGGCTATAAATAAGTAATTTTAATTTAGATCCTTTTAATTAAATGAATTAAGTAATAAATAAGTAATATGAATAAATTAATTAAATGATTAAAATAACTAAANATGAATTAAAAATGAATAGTAAATAATCATAACTTGCTTAAGTTAAATGTTAAGTAGCTGAATAATGGTAANAGTAATAAAGATCTAACTAATCNCTAATTTAATAACTAATAATTNAATAAATTTAATGAAATGAACTAACCTAAATGATAACTNATATGGATAATGCATAATGATAAGTAATATAATGSENTENCE_STARTTAAAGTTCGATTAATGAATGAGTAAATATTAAATAGTGATGATAATGATGGCTGATAATGATTAATAAAGCTATAATAATAAGCTTTAATA
-```
+~~~
 
 Not very good... It should not mix `SENTENCE_START` token inside a sentence. 
 
@@ -107,12 +123,12 @@ I started off by using ~10 genes as training set, ~2 as testing set, trained thr
 
 It seems like we underfitted the data again. What about the sentence generated? 
 
-```
+~~~
 CATCATTGAACTGACTGGTAATCAGCCTGTGGTGATGGATGGAACGATGTACAGCGTGACAGGTCGTATCCCGCTGGTGCTTGAAGGGAACCACGGTTGATGC
 
 
 GACACCATGGCACCGGGGGATGTGGTAATTGTGAAACGCTTCAAGCAGGGGAAGGAATGCCCGTTACCGAATGTCCGGTCAACTTACTGTGGGTTCCGGCGGGGTCCTCATCATCACCGTGCCGGAAGGTTTTTTTGAGCCCAATGTAAGACGAAATAGCTGGACCTCTGCCCGGAAGTGCGGTCTGCAGGAATGTTGGTGTGTGTCCTTCTTTGCCGGGGTGAGTTCGTATTCAAGTCAGTTCCCCGTCCGGATGAATTCTCCAGCAACTGGCTCCCCCCCGTTCAGCGACCCTGTAAACCCTGCTGACCGAAGTTTGTTAAACGGATTCCGGAGCGTGCCCGTCTGAGGTGACCGGGAAA
-```
+~~~
 
 Well, at least the net learned not to include `sentence_start_token` after sentence started. But still, I would expect it to pick up simple patterns such as start and end codon. That is, a sentence starts with "ATG", ends with one of "TAA, TGA, TAG". 
 
@@ -129,9 +145,10 @@ As a final atempt, I chose 10 training examples and 2 testing examples and fed i
             size="medium" %}
 
 Sentence Generated: 
-```
+
+~~~
 C A G G C C G T G G T G G G C C G G G T T T A T G A G A A C T C A C C C A G A G
-```
+~~~
 
 ###Thoughts and Conclusion
 
