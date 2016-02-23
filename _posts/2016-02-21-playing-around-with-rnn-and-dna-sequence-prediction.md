@@ -8,18 +8,21 @@ tags: [maching-learning bioinformatics]
 {% include JB/setup %}
 {:center: style="text-align: center"}
 
-###Introduction
+Introduction
+--------
 RNN stands for recurrent neural network and is a very popular model for squential data processing, such as natural language modelling. After seeing the success of RNN at text prediction in this [post](http://karpathy.github.io/2015/05/21/rnn-effectiveness/). I had an idea of using it to predict DNA sequence and see what kind of interesting patterns it can pick up. The result was not amazing, in fact, not at all, but do read on if you are interested in the process and comment below if you have suggestions. 
 
 
-###Background 
+Background 
+--------
 
 A cDNA refers to coding DNA, it is a sequence of 'A', 'T', 'C', 'G' base pairs. 3 of the consecutive base pairs are a codon and encode for amino acid--building block for protein. cDNA always starts with a start codon 'ATG', and ends with a stop codon, either 'TAA','TAG', or 'TGA'. 
 
 Coursera offers great introduction to neural network: [Andrew Ng's Machine Learning](https://www.coursera.org/learn/machine-learning) at week 4,  and recurrent neural network: [Geoffery Hinton's Neural Networks](https://www.coursera.org/course/neuralnets). I also read this [post](http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-1-introduction-to-rnns/) after I have a basic understanding of neural net. 
 
 
-###Modelling with Vanilla RNN: 
+Modelling with Vanilla RNN: 
+--------
 
 The basic idea of sequence prediction is that given all previous words in a sentence, predict the next word. In our context it might look like this: 
 
@@ -48,39 +51,28 @@ It is easy to parse the sequences using BioPython
 
 ~~~
 from Bio import SeqIO
-
 records = SeqIO.parse("data/e_coli_cdna.fa","fasta")
-
 cDNAs = [list(r.seq) for r in records]
-
 print cDNAs[0]
-
 # ['A', 'T', 'G', 'A', 'A', 'A', ... ]
-
 # adding sentence start and end token
-
 cDNAs = [["SENTENCE_START"] + sent + ["SENTENCE_END"] for sent in cDNAs]
-
 ~~~
 
 Since DNA has really simple vocabulary, we can turn sequences of characters to and from sequences of indices
 
 ~~~
 index_to_word = ["SENTENCE_START",'A','T','C','G','N',"SENTENCE_END"] # N for unknown base pair
-
 word_to_index = dict((c,i) for i,c in enumerate(index_to_word))
-
 encoded_sentence = [word_to_index[c] for c in cDNAs[0]] #encode the first cDNA
-
 print encoded_sentence
-
 # [0, 1, 2, 4, 1, 1, 1 ... ]
-
 ~~~
 
 The indices are further processed to one-hot vector (vector with all 0's plus one 1) and fed in our RNN. I won't go into the details here but you can read this [tutorial](http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-2-implementing-a-language-model-rnn-with-python-numpy-and-theano/) if you are interested. 
 
-###Result
+Result
+--------
 
 After training on an I7 CPU. I have the learning curve plotted, with about 3900 training examples and 400 testing examples. 
 
@@ -108,7 +100,8 @@ Not very good... It should not mix `SENTENCE_START` token inside a sentence.
 Since the learning curve suggests that the model is underfitting, adding more data won't help. Perhaps we can try something else. 
 
 
-###Training with GRU
+Training with GRU
+--------
 
 The difference between vanilla RNN and Gated Recurrent Unit (GRU) is that the latter is more powerful. It introduces a gating mechanism for learning long term dependencies between words, similar to Long Short Term Memory (LSTM) model. I don't have a good intuition for that either and probably won't explain it well, but if you are interested, you can read [here](http://www.wildml.com/2015/10/recurrent-neural-network-tutorial-part-4-implementing-a-grulstm-rnn-with-python-and-theano/). 
 
@@ -133,7 +126,8 @@ GACACCATGGCACCGGGGGATGTGGTAATTGTGAAACGCTTCAAGCAGGGGAAGGAATGCCCGTTACCGAATGTCCGGTC
 Well, at least the net learned not to include `sentence_start_token` after sentence started. But still, I would expect it to pick up simple patterns such as start and end codon. That is, a sentence starts with "ATG", ends with one of "TAA, TGA, TAG". 
 
 
-###Final Attempt, 
+Final Attempt, 
+--------
 
 As a final atempt, I chose 10 training examples and 2 testing examples and fed into 2 layers of GRU each with 512 units, more than 10 times the number before. I only managed to get the first a few gradient updates, since my computer was too slow. 
 
@@ -150,7 +144,8 @@ Sentence Generated:
 C A G G C C G T G G T G G G C C G G G T T T A T G A G A A C T C A C C C A G A G
 ~~~
 
-###Thoughts and Conclusion
+Thoughts and Conclusion
+--------
 
 Well I started the experiment with high hope and got somewhat disappointed in the end, RNN is not magic afterall!
 
