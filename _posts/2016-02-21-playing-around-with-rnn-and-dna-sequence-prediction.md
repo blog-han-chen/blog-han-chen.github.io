@@ -14,7 +14,7 @@ RNN stands for recurrent neural network and is a very popular model for squentia
 
 
 Background 
---------
+--------    
 
 A cDNA refers to coding DNA, it is a sequence of 'A', 'T', 'C', 'G' base pairs. 3 of the consecutive base pairs are a codon and encode for amino acid--building block for protein. cDNA always starts with a start codon 'ATG', and ends with a stop codon, either 'TAA','TAG', or 'TGA'. 
 
@@ -45,7 +45,7 @@ Y (output): A T G T C C G C A T G A SENTECE_END
 
 We would punish the neural network if, given `SETENCE_START`, it doesn't predict `A`, and given `SENTENCE_START A`, it doesn't predict `T`. Batching them together, given sequence X, the network should predict a sequence similar to Y; it is punished for each character predicted wrong. 
 
-As a start, I am using E. coli cDNA data set. The file is about 5Mb big and contains 4000+ cDNA sequences. For real neural network training it is small, but it should suffice as a toy dataset. 
+As a start, I am using <a href="{{ site.url }}/data/Escherichia_coli_gca_000749525.GCA_000749525.1.29.cdna.all.fa.gz" target="_blank">E. coli cDNA data set</a>. The file is about 5Mb big and contains 4000+ cDNA sequences. For real neural network training it is small, but it should suffice as a toy dataset. 
 
 It is easy to parse the sequences using BioPython
 
