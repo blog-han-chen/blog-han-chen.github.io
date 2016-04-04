@@ -39,19 +39,20 @@ The following give overview for each.(text explanation and photo stolen from [th
             caption="" 
  %}
 
-A - a user opens their web-browser and goes to MyPhotos.com which stores all of their photos. MyPhotos.com doesn't handle authentication itself.
+* A - a user opens their web-browser and goes to MyPhotos.com which stores all of their photos. MyPhotos.com doesn't handle authentication itself.
 
-B - to authenticate the user MyPhotos.com constructs a SAML Authnrequest, signs it, optionally encrypts it, and encodes it. After which, it redirects the user's web browser to the Identidy Provider (IdP) in order to authenticate. The IdP receives the request, decodes it, decrypts it if necessary, and verifies the signature.
+* B - to authenticate the user MyPhotos.com constructs a SAML Authnrequest, signs it, optionally encrypts it, and encodes it. After which, it redirects the user's web browser to the Identidy Provider (IdP) in order to authenticate. The IdP receives the request, decodes it, decrypts it if necessary, and verifies the signature.
 
-C - With a valid Authnrequest the IdP will present the user with a login form in which they can enter their username and password.
+* C - With a valid Authnrequest the IdP will present the user with a login form in which they can enter their username and password.
 
-D- Once the user has logged in, the IdP generates a SAML token that includes identity information about the user (such as their username, email, etc). The Id takes the SAML token and redirects the user back to the Service Provider (MyPhotos.com).
+* D - Once the user has logged in, the IdP generates a SAML token that includes identity information about the user (such as their username, email, etc). The Id takes the SAML token and redirects the user back to the Service Provider (MyPhotos.com).
 
-E - MyPhotos.com verifies the SAML token, decrypts it if necessary, and extracts out identity information about the user, such as who they are and what their permissions might be. MyPhotos.com now logs the user into its system, presumably with some kind of cookie and session.
+* E - MyPhotos.com verifies the SAML token, decrypts it if necessary, and extracts out identity information about the user, such as who they are and what their permissions might be. MyPhotos.com now logs the user into its system, presumably with some kind of cookie and session.
 
->Key Highlights:
->Client receives SAML after entering username and password
->SAML is a long xml document, as opposed to a lightweight token
+**Key Highlights:**
+
+* Client receives SAML after entering username and password
+* SAML is a long xml document, as opposed to a lightweight token
 
 
 {% include image.html
@@ -72,9 +73,10 @@ E - MyPhotos.com verifies the SAML token, decrypts it if necessary, and extracts
 
 * F - having validated the user's request MyPhotos.com sends the requested resource back to the user.
 
-> Key Highlights: 
-> The client must request for access token separately, after entering username + password
-> MyPhotos.com server must make another trip to Authorization service to retrieve identity info
+**Key Highlights:**
+
+* The client must request for access token separately, after entering username + password
+* MyPhotos.com server must make another trip to Authorization service to retrieve identity info
 
 
 Pros and Cons
@@ -88,7 +90,7 @@ On the other hand, OAuth2.0 only responds the client with an access token, which
 
 
 
-#SAML Mobile SSO Flow:
+**SAML Mobile SSO Flow:**
 
 Regarding Mobile SSO support, SAML is more chatty than OAuth2
 
@@ -100,7 +102,7 @@ _credit to [here](http://stackoverflow.com/questions/23623200/authenticating-mob
 4. IDP redirects back to your SP with Response your SP application processes Response and generates a token usable with your Rest APIs 
 5. SP communicates the token back to the mobile application (e.g. using WebViewClient + onPageFinished + cookies, or call to object provided with addJavascriptInterface, or whatever you already use)
 
-#OAuth Flow: 
+**OAuth Flow:**
 
 _credit to [here](http://www.slideshare.net/briandavidcampbell/is-that-a-token-in-your-phone-in-your-pocket-or-are-you-just-glad-to-see-me-oauth-20-and-mobile-devices)_
 
@@ -121,5 +123,4 @@ SAML has been around for quite a while and is main stream amongst web apps. Thou
 OAuth2 has been adopted by many tech giants, Google, Facebook etc. and has better support for mobile. But depending on the services you are trying to integrate with, it might not be supported. 
 
 There is not neccessarily the correct solution, but at least you can make informed decision by exploring both. 
-
 
