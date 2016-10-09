@@ -12,14 +12,16 @@ markdown: kramdown
 # so be sure to set them if your theme uses them.
 #
 title : Han Chen's Blog
+description: "a blog about bioinformatics, algorithms, machine learning. Many research notes and tutorials"
 tagline: just another blog
+robots: "index,follow"
 author :
   name : Han Chen
   email : hchen.han.chen@gmail.com
   github : github.com/Chen-Han
   #twitter : N/A
   #feedburner : feedname
-
+keywords: bioinformatics blog machine learning biology tutorial research paper algorithm 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt
 # Most places will/should use BASE_PATH to make the urls
