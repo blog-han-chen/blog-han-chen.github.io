@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Han's Blog
+title: Han Chen's Blog
 tagline: Another learner
 ---
 {% include JB/setup %}
