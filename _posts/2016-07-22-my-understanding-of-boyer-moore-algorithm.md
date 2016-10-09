@@ -36,7 +36,6 @@ We make the following assumption about our algorithm:
 > By default, if the algorithm failed at matching T[i] to P[j], it is going to restart comparison at T[i+m-1] and P[m-1], where m is the length of the pattern. It is equivalent of aligning the first character in P to the failing position, and restart from the back again. 
 
 Example: we failed matching at the last character c
-
 ~~~
 abcabc
      abcabc //realign a to c

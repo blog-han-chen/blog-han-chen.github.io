@@ -1,0 +1,11 @@
+c,connections
+"{""date"":""2011/04/01"",""year"":""2011"",""rank"":""13962"",""id"":""805DDEB4"",""title"":""libsvm a library for support vector machines"",""doi"":""10.1145/1961189.1961199""}",489
+"{""date"":""1995/09/15"",""venue"":""ml"",""year"":""1995"",""journalId"":""03B4502A"",""rank"":""12601"",""id"":""7E59E9AB"",""title"":""support vector networks""}",373
+"{""date"":""2004/11/01"",""venue"":""ijcv"",""year"":""2004"",""journalId"":""0185ADDC"",""rank"":""12766"",""id"":""80373DBF"",""title"":""distinctive image features from scale invariant keypoints""}",369
+"{""date"":""2005"",""confId"":""45083D2F"",""venue"":""cvpr"",""year"":""2005"",""rank"":""13565"",""id"":""80DD088B"",""title"":""histograms of oriented gradients for human detection"",""doi"":""10.1109/CVPR.2005.177""}",290
+"{""date"":""2005/10/15"",""venue"":""technometrics"",""year"":""2005"",""journalId"":""000F08D7"",""rank"":""13065"",""id"":""80127988"",""title"":""principal component analysis"",""doi"":""10.1002/0470013192.bsa501""}",258
+"{""date"":""2003/03/01"",""venue"":""jmlr"",""year"":""2003"",""journalId"":""07179FAA"",""rank"":""13457"",""id"":""70128864"",""title"":""latent dirichlet allocation""}",258
+"{""date"":""1996"",""year"":""1996"",""rank"":""13192"",""id"":""7F423AD2"",""title"":""regression shrinkage and selection via the lasso""}",256
+"{""date"":""1989"",""year"":""genetic algorithms in search optimization and machine learning"",""id"":""61B1A771"",""title"":"" Optimization and Machine Learning"",""doi"":""1989/10/01""}",242
+"{""date"":""2009/02"",""venue"":""pami"",""year"":""2009"",""journalId"":""0BEAEA4E"",""rank"":""14810"",""id"":""7EF25DC7"",""title"":""robust face recognition via sparse representation"",""doi"":""10.1109/TPAMI.2008.79""}",223
+"{""year"":""1973"",""rank"":""10213"",""id"":""0B6E7E46"",""title"":""maximum likelihood from incom plete data via the em algorithm""}",210
