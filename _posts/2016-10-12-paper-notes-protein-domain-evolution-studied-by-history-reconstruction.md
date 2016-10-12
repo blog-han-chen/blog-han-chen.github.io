@@ -23,17 +23,20 @@ The paper presents a new algorithm of constructing domain level evolution that t
 
 #Key Contribution
 -----
+
 * A new, intermediate resolution view on evolution through atomic modules on sub-gene level, rather than high resolution base pair level, or low resolution gene level
 * An algorithm to identify novel evolutionary modules (e.g. domains, exons, or any _subsequence_ of gene) that are subject to gain, loss, and rearrangement. This is based on sequence similiarity given known closely related species
 * A new model for **gene** evolution capturing module operations like module creation, duplication, loss, merge, and split. It traces "gene evolution" rather than "architecture evolution".
 * A new maximum parsimony algorithm to construct evolutionary tree by improving on an existing species tree, taking into account evolutionary modules. 
 
 
-#Key Methods Explained
+Key Methods Explained
 ----
 
 
 #Definitions
+----
+
 * a **module** is a subsequence (not a substring) of base pairs, regarded as an atomic unit of evolution. Modules are conceptually distinct from domains, though they sometimes agree. 
 * **Module Family** is a set of homologous modules. They descend from a single ancestral module, found in the last common ancestor of all species. 
 * **Architecture**: list of modules in a _gene_
@@ -43,6 +46,7 @@ The paper presents a new algorithm of constructing domain level evolution that t
 
 
 #Identifying Modules and Module Families
+----
 
 1. pairwise all vs all BLASTp on all given species. Filter out e-value > 10^-5 and identity <60% (TODO, why?) 
 2. alignments extended using LALIGN 
@@ -51,6 +55,7 @@ The paper presents a new algorithm of constructing domain level evolution that t
 
 
 #Clustering Architectures
+----
 
 1. Take Module Family as vertices, add edges only if two module families are neighbours within at least one gene (Say Module families A, B, found in 1 gene ABC, then A B are connected)
 2. since some module families are highly connected (with >6 neighbours), those are removed
