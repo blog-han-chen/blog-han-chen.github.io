@@ -3,7 +3,7 @@ layout: post
 title: "Paper Notes: Domain Architecture Plasticity"
 description: ""
 category: 
-tags: [Bioinformatics, Paper Notes]
+tags: [Bioinformatics, Paper Notes, Domain Architecture ]
 ---
 {% include JB/setup %}
 {:center: style="text-align: center"}
